@@ -1,12 +1,10 @@
 """""""""""""""""""""""""""""""""""界面配置"""""""""""""""""""""""""""""""""
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guifont=Monaco:h14
-    if has("gui_gtk2")   "GTK2
-        set guifont=WenQuanYi\ Zen\ Hei\ Mono:style=Medium\ 11
+    set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
+        "set guifont=WenQuanYi\ Zen\ Hei\ Mono:style=Medium\ 11
         " set guifont=Liberation\ Mono:style=Medium\ 12
         " set guifont=Monospace\ 12
-    endif
     set guioptions-=T
     set guioptions+=e
     set guioptions-=r
@@ -148,6 +146,14 @@ endif
 """""""""""""""""""""""""""""""""""""快捷键设置"""""""""""""""""""""""""""""""定义快捷键的前缀，即<Leader>
 let mapleader=","
 let g:mapleader=","
+"使用:代替:
+nnoremap ; :
+vnoremap ; :
+"可视模式下移动设定
+vnoremap < <gv
+vnoremap > >gv
+"以sudo权限写入文件
+cmap w!! w !sudo tee % >/dev/null
 "定以快捷键到行首和行尾
 nmap <Leader>a 0
 nmap <Leader>e $
