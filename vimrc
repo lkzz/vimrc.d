@@ -124,6 +124,7 @@ set nobackup
 set noswapfile
 " 允许backspace和光标键跨越行边界
 set whichwrap+=<,>,h,l
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace"
 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
 set mouse=a
 set selection=exclusive
@@ -173,6 +174,9 @@ map <Right> <Nop>
 map <Up> <Nop>
 map <Down> <Nop>
 inoremap <c-j> <ESC>
+"上下移动时移动折行
+noremap j gj
+noremap k gb
 "定义快捷保存文件
 nmap <Leader>w :w<CR>
 "保存并退出文件
