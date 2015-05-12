@@ -176,7 +176,7 @@ map <Down> <Nop>
 inoremap <c-j> <ESC>
 "上下移动时移动折行
 noremap j gj
-noremap k gb
+noremap k gk
 "定义快捷保存文件
 nmap <Leader>w :w<CR>
 "保存并退出文件
