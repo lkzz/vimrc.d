@@ -158,22 +158,30 @@ cmap w!! w !sudo tee % >/dev/null
 "定以快捷键到行首和行尾
 nmap <Leader>a 0
 nmap <Leader>e $
-"使用方向键来进行buffer跳转
-noremap <left> :bp<CR>
-noremap <right> :bn<CR>
-map <Leader>tn :tabnext<cr>
-map <Leader>tp :tabprev<cr>
-" 新建tab  Ctrl+t
-nnoremap <C-t> :tabnew<CR>
-inoremap <C-t> <Esc>:tabnew<CR>
-" 快速选中段落
-nnoremap <Leader>v V`}
-" 关闭方向键, 强迫自己用 hjkl
+" 使用左右方向键进行buffer跳转
 " map <Left> <Nop>
 " map <Right> <Nop>
 " map <Up> <Nop>
 " map <Down> <Nop>
-inoremap <c-j> <ESC>
+"使用方向键来进行buffer跳转
+noremap <left> :bp<CR>
+noremap <right> :bn<CR>
+noremap <Up> :tabprev<CR>
+noremap <Down> :tabnext<CR>
+" map <Leader>n :tabnext<cr>
+" map <Leader>p :tabprev<cr>
+" 新建tab  Ctrl+t
+nnoremap <C-t> :tabnew<CR>
+inoremap <C-t> <Esc>:tabnew<CR>
+"映射按键：剪切版、全选
+vmap <C-c> "+y
+vmap <C-x> "+x
+nmap <C-v> "+gP
+vmap <C-v> "+gP
+nmap <C-a> ggVG
+" 快速选中段落
+nnoremap <Leader>v V`}
+inoremap <c-q> <ESC>
 "上下移动时移动折行
 noremap j gj
 noremap k gk
@@ -184,14 +192,14 @@ nmap <Leader>q :wq<CR>
 "不保存，直接退出
 nmap <Leader>Q :qa!<CR>
 "窗口跳转设置
-" 跳转至右方的窗口
-nnoremap<Leader>l <C-W>l
-" 跳转至方的窗口
-nnoremap<Leader>h <C-W>h
+" 跳转至右边的窗口
+nnoremap <c-l> <c-w>l
+" 跳转至左边的窗口
+nnoremap <c-h> <c-w>h
 " 跳转至上方的子窗口
-nnoremap<Leader>k <C-W>k
+nnoremap <c-k> <C-W>k
 " 跳转至下方的子窗口
-nnoremap<Leader>j <C-W>j
+nnoremap<c-j> <C-W>j
 "快速打开目录，需安装nerdtree
 nnoremap <F2> :NERDTreeTabsToggle<CR>
 "定义<F3>用于开启/关闭行号
@@ -219,18 +227,18 @@ nnoremap <Leader>h :GundoToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"新建.c,.h,.sh,.java文件，自动插入文件头 
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()" 
-""定义函数SetTitle，自动插入文件头 
-func SetTitle() 
-    "如果文件类型为.sh文件 
-    if &filetype == 'sh' 
-        call setline(1,"\#!/bin/bash") 
-        call append(line("."), "") 
+"新建.c,.h,.sh,.java文件，自动插入文件头
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()"
+""定义函数SetTitle，自动插入文件头
+func SetTitle()
+    "如果文件类型为.sh文件
+    if &filetype == 'sh'
+        call setline(1,"\#!/bin/bash")
+        call append(line("."), "")
     elseif &filetype == 'python'
         call setline(1,"#!/usr/bin/env python")
         call append(line("."),"# coding=utf-8")
-        call append(line(".")+1, "") 
+        call append(line(".")+1, "")
 
     elseif &filetype == 'ruby'
         call setline(1,"#!/usr/bin/env ruby")
@@ -239,13 +247,13 @@ func SetTitle()
 
         "    elseif &filetype == 'mkd'
         "        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
-    else 
-        call setline(1, "/*************************************************************************") 
-        call append(line("."), "    > File Name: ".expand("%")) 
-        call append(line(".")+1, "  > Author: ") 
-        call append(line(".")+2, "  > Mail: ") 
-        call append(line(".")+3, "  > Created Time: ".strftime("%c")) 
-        call append(line(".")+4, " ************************************************************************/") 
+    else
+        call setline(1, "/*************************************************************************")
+        call append(line("."), "    > File Name: ".expand("%"))
+        call append(line(".")+1, "  > Author: ")
+        call append(line(".")+2, "  > Mail: ")
+        call append(line(".")+3, "  > Created Time: ".strftime("%c"))
+        call append(line(".")+4, " ************************************************************************/")
         call append(line(".")+5, "")
     endif
     if expand("%:e") == 'cpp'
@@ -267,7 +275,7 @@ func SetTitle()
         call append(line(".")+7,"")
     endif
     "新建文件后，自动定位到文件末尾
-endfunc 
+endfunc
 autocmd BufNewFile * normal G
 
 """""""""""""""""""""""""""""""""""""""""""格式化代码""""""""""""""""""""""""""""

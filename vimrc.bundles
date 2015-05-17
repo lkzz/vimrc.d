@@ -410,5 +410,10 @@ Bundle 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
 ""###### latex #############
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'vim-latex/vim-latex'
+" Plugin 'LaTeX-Box-Team/LaTeX-Box'
+"latex preview
+" Plugin 'xuhdev/vim-latex-live-preview'
+"使用okular来预览pdf文件
+" let g:livepreview_previewer = 'okular'
 "------------------------------------------- end of configs --------------------------------------------
