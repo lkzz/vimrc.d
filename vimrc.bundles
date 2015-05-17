@@ -409,4 +409,6 @@ Bundle 'Blackrush/vim-gocode'
 Bundle 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
+""###### latex #############
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 "------------------------------------------- end of configs --------------------------------------------

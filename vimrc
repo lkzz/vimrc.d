@@ -169,10 +169,10 @@ inoremap <C-t> <Esc>:tabnew<CR>
 " 快速选中段落
 nnoremap <Leader>v V`}
 " 关闭方向键, 强迫自己用 hjkl
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
+" map <Left> <Nop>
+" map <Right> <Nop>
+" map <Up> <Nop>
+" map <Down> <Nop>
 inoremap <c-j> <ESC>
 "上下移动时移动折行
 noremap j gj
