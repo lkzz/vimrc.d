@@ -1,10 +1,7 @@
 """""""""""""""""""""""""""""""""""界面配置"""""""""""""""""""""""""""""""""
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
-        "set guifont=WenQuanYi\ Zen\ Hei\ Mono:style=Medium\ 11
-        " set guifont=Liberation\ Mono:style=Medium\ 12
-        " set guifont=Monospace\ 12
+    set guifont=Andale\ Mono\ Regular\ 11,Menlo\ Regular\ 11,Consolas\ Regular\ 11,Courier\ New\ Regular\ 13
     set guioptions-=T
     set guioptions+=e
     set guioptions-=r
@@ -55,8 +52,6 @@ set cursorcolumn
 set showcmd"
 set winwidth=79
 set magic                   " 设置魔术
-set guioptions-=T           " 隐藏工具栏
-set guioptions-=m           " 隐藏菜单栏
 set shortmess=atI
 """""""""""""""""""""""""""""""""""使用Vundle安装管理插件""""""""""""""""""""
 "插件配置和具体设置在vimrc.bundles中
