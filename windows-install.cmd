@@ -18,7 +18,7 @@ REM    limitations under the License.
 
 @set APP_PATH=%HOME%\.vim
 IF NOT EXIST "%APP_PATH%" (
-    call git clone https://github.com/lkpjj/vim-windows.git "%APP_PATH%"
+    call git clone https://github.com/lkpjj/vim-configs.git "%APP_PATH%"
 ) ELSE (
     @set ORIGINAL_DIR=%CD%
     echo updating vim-windows
