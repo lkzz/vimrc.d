@@ -5,10 +5,17 @@
 "package dependence:  ctags
 "python dependence:   pep8, pyflake
 set nocompatible
+let g:win_platform=0
+let g:linux_platform=0
+if (has('win32') || has ('win64'))
+    let g:win_platform=1
+else
+    let g:linux_platform=1
+
 " Windows Compatible {
     " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
     " across (heterogeneous) systems easier.
-    if has('win32') || has('win64')
+    if g:win_platform
       set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 
       " Be nice and check for multi_byte even if the config requires
@@ -59,7 +66,7 @@ highlight SyntasticErrorSign guifg=white guibg=black
 
 
 " "################### 自动补全 ###################
-if has('win32') || has('win64')    
+if g:win_platform
     Bundle 'Shougo/neocomplete.vim'
     "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
     " Disable AutoComplPop.
@@ -146,7 +153,7 @@ if has('win32') || has('win64')
     let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 endif
 
-if has('unix')
+if g:linux_platform
     Bundle 'Valloric/YouCompleteMe'
     "youcompleteme  默认tab  s-tab 和自动补全冲突
     "let g:ycm_key_list_select_completion=['<c-n>']
