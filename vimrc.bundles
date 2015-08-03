@@ -2,17 +2,13 @@
 "python dependence:   pep8, pyflake
 set nocompatible
 let g:win_platform=0
-let g:linux_platform=0
-if (has('win32') || has ('win64'))
-    let g:win_platform=1
-else
-    let g:linux_platform=1
 
 " Windows Compatible {
     " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
     " across (heterogeneous) systems easier.
-    if g:win_platform
-      set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+    if has('win32') || has('win64')
+        let g:win_platform=1
+        set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 
       " Be nice and check for multi_byte even if the config requires
       " multi_byte support most of the time
@@ -137,9 +133,7 @@ if g:win_platform
     " For perlomni.vim setting.
     " https://github.com/c9s/perlomni.vim
     let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-endif
-
-if g:linux_platform
+else
     Bundle 'Valloric/YouCompleteMe'
     "youcompleteme  默认tab  s-tab 和自动补全冲突
     "let g:ycm_key_list_select_completion=['<c-n>']
