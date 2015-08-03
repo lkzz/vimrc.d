@@ -107,17 +107,40 @@
             Bundle 'tpope/vim-surround'
             Bundle 'tpope/vim-repeat'
             Bundle 'jiangmiao/auto-pairs'
+
             Bundle 'ctrlpvim/ctrlp.vim'
+            let g:ctrlp_map = '<Leader>p'
+            let g:ctrlp_cmd = 'CtrlP'
+            "set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux"
+            let g:ctrlp_custom_ignore = {
+                \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+                \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz)$',
+                \ }
+            "\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+            let g:ctrlp_working_path_mode=0
+            let g:ctrlp_match_window_bottom=1
+            let g:ctrlp_max_height=15
+            let g:ctrlp_match_window_reversed=0
+            let g:ctrlp_mruf_max=500
+            let g:ctrlp_follow_symlinks=1
+
             Bundle 'tacahiroy/ctrlp-funky'
             Bundle 'kristijanhusak/vim-multiple-cursors'
             Bundle 'vim-scripts/sessionman.vim'
             Bundle 'matchit.zip'
-            if (has("python") || has("python3")) && exists('g:spf13_use_powerline') && !exists('g:spf13_use_old_powerline')
-                Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-            elseif exists('g:spf13_use_powerline') && exists('g:spf13_use_old_powerline')
-                Bundle 'Lokaltog/vim-powerline'
-            else
-                Bundle 'bling/vim-airline'
+
+            Bundle 'bling/vim-airline'
+            let g:airline_theme='luna'
+            if !exists('g:airline_symbols')
+            let g:airline_symbols = {}
+            endif
+            let g:airline_left_sep = '▶'
+            let g:airline_left_alt_sep = '❯'
+            let g:airline_right_sep = '◀'
+            let g:airline_right_alt_sep = '❮'
+            let g:airline_symbols.linenr = '¶'
+            let g:airline_symbols.branch = '⎇'
+
             endif
             Bundle 'bling/vim-bufferline'
             Bundle 'Lokaltog/vim-easymotion'
@@ -134,6 +157,42 @@
             Bundle 'kana/vim-textobj-user'
             Bundle 'kana/vim-textobj-indent'
             Bundle 'gcmt/wildfire.vim'
+            Bundle 'Raimondi/delimitMate'
+            " 选中区块
+            Bundle 'terryma/vim-expand-region'
+            map + <Plug>(expand_region_expand)
+            map _ <Plug>(expand_region_shrink)
+
+            " edit history, 可以查看回到某个历史状态
+            Bundle 'sjl/gundo.vim'
+            nnoremap <Leader>h :GundoToggle<CR>
+
+            "括号显示增强
+            Bundle 'kien/rainbow_parentheses.vim'
+            let g:rbpt_colorpairs = [
+                \ ['brown',       'RoyalBlue3'],
+                \ ['Darkblue',    'SeaGreen3'],
+                \ ['darkgray',    'DarkOrchid3'],
+                \ ['darkgreen',   'firebrick3'],
+                \ ['darkcyan',    'RoyalBlue3'],
+                \ ['darkred',     'SeaGreen3'],
+                \ ['darkmagenta', 'DarkOrchid3'],
+                \ ['brown',       'firebrick3'],
+                \ ['gray',        'RoyalBlue3'],
+                \ ['black',       'SeaGreen3'],
+                \ ['darkmagenta', 'DarkOrchid3'],
+                \ ['Darkblue',    'firebrick3'],
+                \ ['darkgreen',   'RoyalBlue3'],
+                \ ['darkcyan',    'SeaGreen3'],
+                \ ['darkred',     'DarkOrchid3'],
+                \ ['red',         'firebrick3'],
+                \ ]
+            let g:rbpt_max = 40
+            let g:rbpt_loadcmd_toggle = 0
+            au VimEnter * RainbowParenthesesToggle
+            au Syntax * RainbowParenthesesLoadRound
+            au Syntax * RainbowParenthesesLoadSquare
+            au Syntax * RainbowParenthesesLoadBraces
         endif
     " }
 
@@ -154,6 +213,7 @@
             Bundle 'mattn/webapi-vim'
             Bundle 'mattn/gist-vim'
             Bundle 'scrooloose/nerdcommenter'
+            let g:NERDSpaceDelims=1
             Bundle 'tpope/vim-commentary'
             Bundle 'godlygeek/tabular'
             if executable('ctags')
@@ -293,14 +353,34 @@
 
 " }
 
-" Use fork bundles config if available {
-    if filereadable(expand("~/.vimrc.bundles.fork"))
-        source ~/.vimrc.bundles.fork
-    endif
-" }
-
-" Use local bundles config if available {
-    if filereadable(expand("~/.vimrc.bundles.local"))
-        source ~/.vimrc.bundles.local
-    endif
-" }
+" go语言的tagbar配置
+" 1.install gotags 'go get -u github.com/jstemmer/gotags'
+" 2.make sure `gotags` in you shell PATH, you can call check it with `which gotags`
+" for gotags. work with tagbar
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
