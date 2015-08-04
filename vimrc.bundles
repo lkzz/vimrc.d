@@ -258,10 +258,19 @@
     " Python {
         if count(g:spf13_bundle_groups, 'python')
             " Pick either python-mode or pyflakes & pydoc
-            Bundle 'klen/python-mode'
+            " Bundle 'klen/python-mode'
             Bundle 'yssource/python.vim'
             Bundle 'python_match.vim'
             Bundle 'pythoncomplete'
+            "###### Python #########
+
+            " python fly check, 弥补syntastic只能打开和保存才检查语法的不足
+            Bundle 'kevinw/pyflakes-vim'
+            let g:pyflakes_use_quickfix = 0
+
+            " for python.vim syntax highlight
+            Bundle 'hdima/python-syntax'
+            let python_highlight_all = 1
         endif
     " }
 
