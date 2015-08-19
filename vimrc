@@ -119,7 +119,7 @@ set nobackup
 set noswapfile
 " 允许backspace和光标键跨越行边界
 set whichwrap+=<,>,h,l
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace"
+" set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace"
 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
 set mouse=a
 set selection=exclusive
