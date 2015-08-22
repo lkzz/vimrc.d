@@ -272,19 +272,24 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 "代码对齐指示插件
-Bundle 'nathanaelkane/vim-indent-guides'
-" 随 vim 自启动
-let g:indent_guides_enable_on_vim_startup=1
-" 从第二层开始可视化显示缩进
-let g:indent_guides_start_level=1
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=darkgrey
-let g:indent_guides_auto_colors = 1
-let g:indent_guides_guide_size = 1
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
-hi IndentGuidesOdd guibg=red ctermbg=3
-hi IndentGuidesEven guibg=green ctermbg=4
+Plugin 'Yggdroot/indentLine'
+let g:indentLine_enabled = 1
+let g:indentLine_color_term = 239
+let g:indentLine_color_tty_light = 7 " (default: 4)
+let g:indentLine_color_dark = 1 " (default: 2))
+" Bundle 'nathanaelkane/vim-indent-guides'
+" " 随 vim 自启动
+" let g:indent_guides_enable_on_vim_startup=0
+" " 从第二层开始可视化显示缩进
+" let g:indent_guides_start_level=1
+" hi IndentGuidesOdd  ctermbg=black
+" hi IndentGuidesEven ctermbg=darkgrey
+" let g:indent_guides_auto_colors = 1
+" let g:indent_guides_guide_size = 1
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+" hi IndentGuidesOdd guibg=red ctermbg=3
+" hi IndentGuidesEven guibg=green ctermbg=4
 
 "################### 快速导航 ###################
 "目录导航
@@ -404,6 +409,12 @@ let python_highlight_all = 1
 " 2.make sure gocode in your path: `which gocode` (add $GOPATH/bin to you $PATH)
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Bundle 'fatih/vim-go'
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
 
 
 "###### Markdown #########
