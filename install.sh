@@ -43,6 +43,13 @@ echo "If error,you need to compile it yourself"
 echo "cd $CURRENT_DIR/bundle/YouCompleteMe/ && bash -x install.sh --clang-completer"
 cd $CURRENT_DIR/bundle/YouCompleteMe/
 
+echo "Step6: download plugins for golang"
+echo "Step6.1: go get -u github.com/jstemmer/gotags"
+go get -u github.com/jstemmer/gotags
+
+echo "Step6.2: go get -u github.com/nsf/gocode"
+go get -u github.com/nsf/gocode
+
 if [ `which clang` ]   # check system clang
 then
     bash -x install.sh --clang-completer --system-libclang   # use system clang
