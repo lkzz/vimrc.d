@@ -223,7 +223,7 @@ nnoremap <Leader>h :GundoToggle<CR>
 """""新文件标题
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "新建.c,.h,.sh,.java文件，自动插入文件头
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()"
+autocmd BufNewFile *.go,*.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()"
 ""定义函数SetTitle，自动插入文件头
 func SetTitle()
     "如果文件类型为.sh文件
@@ -242,10 +242,16 @@ func SetTitle()
 
         "    elseif &filetype == 'mkd'
         "        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
+    elseif &filetype == 'go'
+        call setline(1, "/*************************************************************************")
+        call append(line("."),"File Name: ".expand("%"))
+        call append(line(".")+1, "  > Author: liangkai")
+        call append(line(".")+2, "  > Created Time: ".strftime("%c"))
+        call append(line(".")+3, " ************************************************************************/")
     else
         call setline(1, "/*************************************************************************")
         call append(line("."), "    > File Name: ".expand("%"))
-        call append(line(".")+1, "  > Author: ")
+        call append(line(".")+1, "  > Author: liangkai")
         call append(line(".")+2, "  > Mail: ")
         call append(line(".")+3, "  > Created Time: ".strftime("%c"))
         call append(line(".")+4, " ************************************************************************/")
