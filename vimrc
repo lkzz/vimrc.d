@@ -244,10 +244,11 @@ func SetTitle()
         "        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
     elseif &filetype == 'go'
         call setline(1, "/*************************************************************************")
-        call append(line("."),"File Name: ".expand("%"))
+        call append(line("."), "  > File Name: ".expand("%"))
         call append(line(".")+1, "  > Author: liangkai")
         call append(line(".")+2, "  > Created Time: ".strftime("%c"))
         call append(line(".")+3, " ************************************************************************/")
+        call append(line(".")+4, "")
     else
         call setline(1, "/*************************************************************************")
         call append(line("."), "    > File Name: ".expand("%"))
