@@ -231,7 +231,7 @@ nnoremap <Leader>h :GundoToggle<CR>
 
 "状态栏增强展示
 " 新的airline配置
-Bundle 'bling/vim-airline'
+Bundle 'bling/vim-airline-themes'
 let g:airline_theme='luna'
 if !exists('g:airline_symbols')
 let g:airline_symbols = {}
