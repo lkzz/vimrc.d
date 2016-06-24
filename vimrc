@@ -197,14 +197,14 @@ nnoremap <c-k> <C-W>k
 nnoremap<c-j> <C-W>j
 "快速打开目录，需安装nerdtree
 nnoremap <F2> :NERDTreeTabsToggle<CR>
-"定义<F3>用于开启/关闭行号
-nnoremap <F3> :call HideNumber()<CR>
+"tagbar快捷键，需安装tagbar插件
+map <F3> :TagbarToggle<CR>
+"定义<F4>用于开启/关闭行号
+nnoremap <F4> :call HideNumber()<CR>
 "按<F5>运行当前代码，CompileRun()在下文定义
 map <F5> :call CompileRun()<CR>
 "快速格式化代码，FormartSrc()在文件后面定义
 map <F6> :call FormartSrc()<CR><CR>
-"tagbar快捷键，需安装tagbar插件
-nmap <F8> :TagbarToggle<CR>
 "设置进入粘贴模式快捷键
 set pastetoggle=<F10>
 au InsertLeave * set nopaste
