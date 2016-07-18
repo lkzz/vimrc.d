@@ -145,26 +145,18 @@ let g:mapleader=","
 "使用:代替:
 nnoremap ; :
 vnoremap ; :
+
 "可视模式下移动设定
 vnoremap < <gv
 vnoremap > >gv
+
 "以sudo权限写入文件
 cmap w!! w !sudo tee % >/dev/null
-"定以快捷键到行首和行尾
-nmap <Leader>a 0
-nmap <Leader>e $
-" 使用左右方向键进行buffer跳转
-" map <Left> <Nop>
-" map <Right> <Nop>
-" map <Up> <Nop>
-" map <Down> <Nop>
 "使用方向键来进行buffer跳转
 noremap <left> :bp<CR>
 noremap <right> :bn<CR>
 noremap <Up> :tabprev<CR>
 noremap <Down> :tabnext<CR>
-" map <Leader>n :tabnext<cr>
-" map <Leader>p :tabprev<cr>
 " 新建tab  Ctrl+t
 nnoremap <C-t> :tabnew<CR>
 inoremap <C-t> <Esc>:tabnew<CR>
@@ -197,14 +189,14 @@ nnoremap <c-k> <C-W>k
 nnoremap<c-j> <C-W>j
 "快速打开目录，需安装nerdtree
 nnoremap <F2> :NERDTreeTabsToggle<CR>
-"tagbar快捷键，需安装tagbar插件
-map <F3> :TagbarToggle<CR>
-"定义<F4>用于开启/关闭行号
-nnoremap <F4> :call HideNumber()<CR>
+"定义<F3>用于开启/关闭行号
+nnoremap <F3> :call HideNumber()<CR>
 "按<F5>运行当前代码，CompileRun()在下文定义
 map <F5> :call CompileRun()<CR>
 "快速格式化代码，FormartSrc()在文件后面定义
 map <F6> :call FormartSrc()<CR><CR>
+"tagbar快捷键，需安装tagbar插件
+nmap <F8> :TagbarToggle<CR>
 "设置进入粘贴模式快捷键
 set pastetoggle=<F10>
 au InsertLeave * set nopaste
@@ -212,11 +204,20 @@ au InsertLeave * set nopaste
 nnoremap <Leader>f :CtrlPMRUFiles<CR>
 "进入对应的filetype编辑，依赖插件ultisnips
 map <Leader>us :UltiSnipsEdit<CR>
-"快速跳转，依赖插件easymotion
-nmap <Leader>s <Plug>(easymotion-s2)
-nmap <Leader>t <Plug>(easymotion-t2)
 "查看文件编辑历史状态，依赖插件gundo
 nnoremap <Leader>h :GundoToggle<CR>
+
+""""""""""""""""""""""""""""""""""""""move""""""""""""""""""""""""""""""""""""""""""""""""""""
+"定以快捷键到行首和行尾
+nmap <Leader>a 0
+nmap <Leader>e $
+"快速跳转，依赖插件easymotion
+map <Leader>s <Plug>(easymotion-s2)
+map <Leader>t <Plug>(easymotion-t2)
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
 """""""""""""""""""""""""""""""""""""其他配置"""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

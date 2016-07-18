@@ -166,9 +166,6 @@ let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String']
 "更高效的移动 [,, + w/fx]
 Bundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
-nmap <Leader><Leader>s <Plug>(easymotion-s2)
-nmap <Leader><Leader>t <Plug>(easymotion-t2)
-
 
 Bundle 'vim-scripts/matchit.zip'
 " 显示marks - 方便自己进行标记和跳转
@@ -231,8 +228,8 @@ nnoremap <Leader>h :GundoToggle<CR>
 
 "状态栏增强展示
 " 新的airline配置
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 let g:airline_theme='luna'
 if !exists('g:airline_symbols')
 let g:airline_symbols = {}
@@ -416,11 +413,7 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>s <Plug>(go-implements)
+
 
 "###### Markdown #########
 Bundle 'plasticboy/vim-markdown'
