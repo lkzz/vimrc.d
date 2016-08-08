@@ -272,15 +272,35 @@ let g:indentLine_color_term = 239
 "################### 快速导航 ###################
 "目录导航
 Bundle 'scrooloose/nerdtree'
+"open a NERDTree automatically when vim starts up if no files were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+"change default arrows
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
 "let NERDTreeDirArrows=0
-"let g:netrw_home='~/bak'
-"close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
 " s/v 分屏打开文件
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
+
+" A plugin of NERDTree showing git status flags
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
 
 
 Bundle 'jistr/vim-nerdtree-tabs'
@@ -289,6 +309,7 @@ let g:nerdtree_tabs_synchronize_view=0
 let g:nerdtree_tabs_synchronize_focus=0
 " 自动开启nerdtree
 " let g:nerdtree_tabs_open_on_console_startup=1
+let g:nerdtree_tabs_autofind=1
 
 
 " Vim Workspace Controller
