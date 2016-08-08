@@ -1,5 +1,6 @@
 """""""""""""""""""""""""""""""""""界面配置"""""""""""""""""""""""""""""""""
 " Set extra options when running in GUI mode
+set shell=bash\ -i
 if has("gui_running")
     set guifont=Andale\ Mono\ Regular\ 11,Menlo\ Regular\ 11,Consolas\ Regular\ 11,Courier\ New\ Regular\ 13
     set guioptions-=T
@@ -20,6 +21,7 @@ let g:solarized_contrast="normal"
 let g:solarized_visibility="normal"
 " 配色方案
 set background=dark
+syntax enable
 set t_Co=256
 colorscheme molokai
 "设置标记一列的背景颜色和数字一行颜色一致
@@ -180,17 +182,27 @@ nmap <Leader>q :wq<CR>
 nmap <Leader>Q :qa!<CR>
 "窗口跳转设置
 " 跳转至右边的窗口
-nnoremap <c-l> <c-w>l
+nnoremap <C-l> <C-w>l
 " 跳转至左边的窗口
-nnoremap <c-h> <c-w>h
+nnoremap <C-h> <C-w>h
 " 跳转至上方的子窗口
-nnoremap <c-k> <C-W>k
+nnoremap <C-k> <C-W>k
 " 跳转至下方的子窗口
-nnoremap<c-j> <C-W>j
+nnoremap<C-j> <C-W>j
+" 减小当前窗口的高度
+nnoremap<C--> <C-w>-
+" 增加当前窗口的高度
+nnoremap<C-=> <C-w>+
+" 减小当前窗口的宽度
+nnoremap<C-<> <C-w> <
+" 增加当前窗口的宽度
+nnoremap<C->> <C-w> >
 "快速打开目录，需安装nerdtree
 nnoremap <F2> :NERDTreeTabsToggle<CR>
 "定义<F3>用于开启/关闭行号
 nnoremap <F3> :call HideNumber()<CR>
+"定义<F4>用于快速去除文档中的行尾空格
+nnoremap <F4> :StripWhitespace<CR>
 "按<F5>运行当前代码，CompileRun()在下文定义
 map <F5> :call CompileRun()<CR>
 "快速格式化代码，FormartSrc()在文件后面定义

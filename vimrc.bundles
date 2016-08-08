@@ -29,9 +29,16 @@ Bundle 'gmarik/vundle'
 
 " 多语言语法检查
 Bundle 'scrooloose/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 let g:syntastic_error_symbol='>>'
 let g:syntastic_warning_symbol='>'
-let g:syntastic_check_on_open=1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting = 0
 "let g:syntastic_python_checker="flake8,pyflakes,pep8,pylint"
 let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快
@@ -149,8 +156,6 @@ Bundle 'tpope/vim-repeat'
 
 " 快速去行尾空格 [, + <Space>]
 Bundle 'ntpeters/vim-better-whitespace'
-" Bundle 'bronson/vim-trailing-whitespace'
-" map <Leader><space> :FixWhitespace<cr>
 
 " 快速赋值语句对齐
 Bundle 'junegunn/vim-easy-align'
@@ -210,16 +215,6 @@ let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 
-
-" ctrlp插件1 - 不用ctag进行函数快速跳转
-Bundle 'tacahiroy/ctrlp-funky'
-nnoremap <Leader>cj :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-nnoremap <Leader>cl :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-let g:ctrlp_funky_syntax_highlight = 1
-let g:ctrlp_extensions = ['funky']
-
-
 " edit history, 可以查看回到某个历史状态
 Bundle 'sjl/gundo.vim'
 nnoremap <Leader>h :GundoToggle<CR>
@@ -273,21 +268,6 @@ au Syntax * RainbowParenthesesLoadBraces
 Plugin 'Yggdroot/indentLine'
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 239
-let g:indentLine_color_tty_light = 7 " (default: 4)
-let g:indentLine_color_dark = 1 " (default: 2))
-" Bundle 'nathanaelkane/vim-indent-guides'
-" " 随 vim 自启动
-" let g:indent_guides_enable_on_vim_startup=0
-" " 从第二层开始可视化显示缩进
-" let g:indent_guides_start_level=1
-" hi IndentGuidesOdd  ctermbg=black
-" hi IndentGuidesEven ctermbg=darkgrey
-" let g:indent_guides_auto_colors = 1
-" let g:indent_guides_guide_size = 1
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
-" hi IndentGuidesOdd guibg=red ctermbg=3
-" hi IndentGuidesEven guibg=green ctermbg=4
 
 "################### 快速导航 ###################
 "目录导航
@@ -308,7 +288,7 @@ Bundle 'jistr/vim-nerdtree-tabs'
 let g:nerdtree_tabs_synchronize_view=0
 let g:nerdtree_tabs_synchronize_focus=0
 " 自动开启nerdtree
-"let g:nerdtree_tabs_open_on_console_startup=1
+" let g:nerdtree_tabs_open_on_console_startup=1
 
 
 " Vim Workspace Controller
@@ -322,20 +302,20 @@ hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=
 
 
 "for minibufferexpl 去掉, 有需要同学的自己解开
-" Bundle 'fholgado/minibufexpl.vim'
-" let g:miniBufExplMapWindowNavVim = 1
-" let g:miniBufExplMapWindowNavArrows = 1
-" let g:miniBufExplMapCTabSwitchBufs = 1
-" let g:miniBufExplModSelTarget = 1
-" " 解决FileExplorer窗口变小问题
-" let g:miniBufExplForceSyntaxEnable = 1
-" let g:miniBufExplorerMoreThanOne=2
-" let g:miniBufExplCycleArround=1
-" " 默认方向键左右可以切换buffer
-" nnoremap <TAB> :MBEbn<CR>
-" noremap <Leader>bn :MBEbn<CR>
-" noremap <Leader>bp :MBEbp<CR>
-" noremap <Leader>bd :MBEbd<CR>
+Bundle 'fholgado/minibufexpl.vim'
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+" 解决FileExplorer窗口变小问题
+let g:miniBufExplForceSyntaxEnable = 1
+let g:miniBufExplorerMoreThanOne=2
+let g:miniBufExplCycleArround=1
+" 默认方向键左右可以切换buffer
+nnoremap <TAB> :MBEbn<CR>
+noremap <Leader>bn :MBEbn<CR>
+noremap <Leader>bp :MBEbp<CR>
+noremap <Leader>bd :MBEbd<CR>
 
 
 " 标签导航
@@ -415,12 +395,16 @@ let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
 
-"###### Markdown #########
-Bundle 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_disabled=1
+" "###### Markdown #########
+" Bundle 'godlygeek/tabular'
+" Bundle 'plasticboy/vim-markdown'
+" let g:vim_markdown_folding_disabled=1
+" "markdown预览
+" Bundle 'JamshedVesuna/vim-markdown-preview'
+" let vim_markdown_preview_browser='Google Chrome'
 
 ""###### latex #############
-Plugin 'vim-latex/vim-latex'
+" Plugin 'vim-latex/vim-latex'
 " Plugin 'LaTeX-Box-Team/LaTeX-Box'
 "latex preview
 " Plugin 'xuhdev/vim-latex-live-preview'
