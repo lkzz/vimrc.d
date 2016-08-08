@@ -269,6 +269,8 @@ Plugin 'Yggdroot/indentLine'
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 239
 
+Bundle 'godlygeek/tabular'
+
 "################### 快速导航 ###################
 "目录导航
 Bundle 'scrooloose/nerdtree'
@@ -332,12 +334,12 @@ let g:miniBufExplModSelTarget = 1
 let g:miniBufExplForceSyntaxEnable = 1
 let g:miniBufExplorerMoreThanOne=2
 let g:miniBufExplCycleArround=1
-" 默认方向键左右可以切换buffer
-nnoremap <TAB> :MBEbn<CR>
-noremap <Leader>bn :MBEbn<CR>
-noremap <Leader>bp :MBEbp<CR>
-noremap <Leader>bd :MBEbd<CR>
-
+" MiniBufExpl Colors
+hi MBENormal               guifg=#FFFFFF guibg=fg
+hi MBEChanged              guifg=#CD5907 guibg=fg
+hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
+hi MBEVisibleChanged       guifg=#F1266F guibg=fg
+hi MBEVisibleActiveNormal  guifg=#A6DB29 guibg=fg
 
 " 标签导航
 Bundle 'majutsushi/tagbar'
@@ -417,7 +419,6 @@ let g:go_fmt_command = "goimports"
 
 
 " "###### Markdown #########
-" Bundle 'godlygeek/tabular'
 " Bundle 'plasticboy/vim-markdown'
 " let g:vim_markdown_folding_disabled=1
 " "markdown预览

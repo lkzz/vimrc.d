@@ -154,12 +154,19 @@ vnoremap > >gv
 
 "以sudo权限写入文件
 cmap w!! w !sudo tee % >/dev/null
-"使用方向键来进行buffer跳转
-noremap <left> :bp<CR>
-noremap <right> :bn<CR>
-noremap <Up> :tabprev<CR>
-noremap <Down> :tabnext<CR>
+" "使用方向键来进行buffer跳转
+" noremap <left> :bp<CR>
+" noremap <right> :bn<CR>
+" noremap <Up> :tabprev<CR>
+" noremap <Down> :tabnext<CR>
 " 新建tab  Ctrl+t
+
+" 默认方向键左右可以切换buffer
+nnoremap <TAB> :MBEbn<CR>
+noremap <Leader>bn :MBEbn<CR>
+noremap <Leader>bp :MBEbp<CR>
+noremap <Leader>bd :MBEbd<CR>
+
 nnoremap <C-t> :tabnew<CR>
 inoremap <C-t> <Esc>:tabnew<CR>
 "映射按键：剪切版、全选
@@ -188,15 +195,15 @@ nnoremap <C-h> <C-w>h
 " 跳转至上方的子窗口
 nnoremap <C-k> <C-W>k
 " 跳转至下方的子窗口
-nnoremap<C-j> <C-W>j
+nnoremap <C-j> <C-W>j
 " 减小当前窗口的高度
-nnoremap<C--> <C-w>-
+nnoremap w- :resize -3<CR>
 " 增加当前窗口的高度
-nnoremap<C-=> <C-w>+
+nnoremap w= :resize +3<CR>
 " 减小当前窗口的宽度
-nnoremap<C-<> <C-w> <
+nnoremap w, :vertical resize -5<CR>
 " 增加当前窗口的宽度
-nnoremap<C->> <C-w> >
+nnoremap w. :vertical resize +5<CR>
 "快速打开目录，需安装nerdtree
 nnoremap <F2> :NERDTreeTabsToggle<CR>
 "定义<F3>用于开启/关闭行号
