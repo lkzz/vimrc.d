@@ -154,12 +154,6 @@ vnoremap > >gv
 
 "以sudo权限写入文件
 cmap w!! w !sudo tee % >/dev/null
-" "使用方向键来进行buffer跳转
-" noremap <left> :bp<CR>
-" noremap <right> :bn<CR>
-" noremap <Up> :tabprev<CR>
-" noremap <Down> :tabnext<CR>
-" 新建tab  Ctrl+t
 
 " 默认方向键左右可以切换buffer
 nnoremap <TAB> :MBEbn<CR>
@@ -167,14 +161,17 @@ noremap <Leader>bn :MBEbn<CR>
 noremap <Leader>bp :MBEbp<CR>
 noremap <Leader>bd :MBEbd<CR>
 
+" 新建tab  Ctrl+t
 nnoremap <C-t> :tabnew<CR>
 inoremap <C-t> <Esc>:tabnew<CR>
+
 "映射按键：剪切版、全选
 vmap <C-c> "+y
 vmap <C-x> "+x
 nmap <C-v> "+gP
 vmap <C-v> "+gP
 nmap <C-a> ggVG
+
 " 快速选中段落
 nnoremap <Leader>v V`}
 inoremap <c-q> <ESC>
