@@ -417,6 +417,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
+"###### vim git########
+Plugin 'tpope/vim-fugitive'
 
 " "###### Markdown #########
 " Bundle 'plasticboy/vim-markdown'

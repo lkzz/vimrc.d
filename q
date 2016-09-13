@@ -160,7 +160,6 @@ nnoremap <TAB> :MBEbn<CR>
 noremap <Leader>bn :MBEbn<CR>
 noremap <Leader>bp :MBEbp<CR>
 noremap <Leader>bd :MBEbd<CR>
-noremap <Leader>bl :ls<CR>
 
 " 新建tab  Ctrl+t
 nnoremap <C-t> :tabnew<CR>
