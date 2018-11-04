@@ -24,7 +24,6 @@ call vundle#rc()
 "     :BundleClean       remove plugin not in list 删除本地无用插件
 Bundle 'gmarik/vundle'
 
-
 " ################### 基础 ######################
 
 " 多语言语法检查
@@ -46,90 +45,96 @@ let g:syntastic_javascript_checkers = ['jsl', 'jshint']
 let g:syntastic_html_checkers=['tidy', 'jshint']
 highlight SyntasticErrorSign guifg=white guibg=black
 
-
 "################### 自动补全 ###################
 " 代码自动补全
-"迄今为止用到的最好的自动VIM自动补全插件
-"重启 :YcmRestartServer
-Bundle 'Valloric/YouCompleteMe'
-"youcompleteme  默认tab  s-tab 和自动补全冲突
-"let g:ycm_key_list_select_completion=['<c-n>']
-let g:ycm_key_list_select_completion = ['<Down>']
-"let g:ycm_key_list_previous_completion=['<c-p>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
-let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
-let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
-let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_tags_files = 1
-" 自动补全配置
-"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-set completeopt=longest,menu
+Bundle 'Shougo/neocomplete.vim'
+"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
 
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" let g:ycm_autoclose_preview_window_after_insertion = 1
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
 
-" 跳转到定义处, 分屏打开
-let g:ycm_goto_buffer_command = 'horizontal-split'
-" nnoremap <Leader>jd :YcmCompleter GoToDefinition<CR>
-nnoremap <Leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <Leader>gd :YcmCompleter GoToDeclaration<CR>
-
-
-"let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
-
-" 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
-" old version
-if !empty(glob("~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
-    let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
 endif
-" new version
-if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
-    let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" 直接触发自动补全 insert模式下
-" let g:ycm_key_invoke_completion = '<C-Space>'
-" 黑名单,不启用
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'gitcommit' : 1,
-      \}
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 
 " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
-Bundle 'SirVer/ultisnips'
+"Bundle 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Bundle 'honza/vim-snippets'
 
-let g:UltiSnipsExpandTrigger       = "<tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
-let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+" let g:UltiSnipsExpandTrigger       = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
+" let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+" let g:UltiSnipsUsePythonVersion = 2
+
 " 定义存放代码片段的文件夹 .vim/UltiSnips下，使用自定义和默认的，将会的到全局，有冲突的会提示
 " 进入对应filetype的snippets进行编辑
-map <Leader>us :UltiSnipsEdit<CR>
-
-" " ctrl+j/k 进行选择
-" func! g:JInYCM()
-    " if pumvisible()
-        " return "\<C-n>"
-    " else
-        " return "\<c-j>"
-    " endif
-" endfunction
-
-" func! g:KInYCM()
-    " if pumvisible()
-        " return "\<C-p>"
-    " else
-        " return "\<c-k>"
-    " endif
-" endfunction
-" inoremap <c-j> <c-r>=g:JInYCM()<cr>
-" au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
-" let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
+" map <Leader>us :UltiSnipsEdit<CR>
 
 
 " 自动补全单引号，双引号等
@@ -147,7 +152,6 @@ let g:closetag_html_style=1
 " 快速注释
 Bundle 'scrooloose/nerdcommenter'
 let g:NERDSpaceDelims=1
-
 
 " 快速加入修改环绕字符
 Bundle 'tpope/vim-surround'
@@ -186,15 +190,6 @@ Bundle 'terryma/vim-expand-region'
 map + <Plug>(expand_region_expand)
 map _ <Plug>(expand_region_shrink)
 
-" " 多光标选中编辑
-" Bundle 'terryma/vim-multiple-cursors'
-" let g:multi_cursor_use_default_mapping=0
-" " Default mapping
-" let g:multi_cursor_next_key='<C-m>'
-" let g:multi_cursor_prev_key='<C-p>'
-" let g:multi_cursor_skip_key='<C-x>'
-" let g:multi_cursor_quit_key='<Esc>'
-
 "################### 功能相关 ###################
 
 " 文件搜索
@@ -227,14 +222,10 @@ Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 let g:airline_theme='luna'
 if !exists('g:airline_symbols')
-let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '❯'
-let g:airline_right_sep = '◀'
-let g:airline_right_alt_sep = '❮'
-let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'
+let g:airline_powerline_fonts = 1
 
 
 "括号显示增强
@@ -268,6 +259,10 @@ au Syntax * RainbowParenthesesLoadBraces
 Plugin 'Yggdroot/indentLine'
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 239
+
+" install theme
+Bundle 'chriskempson/vim-tomorrow-theme'
+Plugin 'morhetz/gruvbox'
 
 Bundle 'godlygeek/tabular'
 
@@ -391,8 +386,6 @@ let g:tagbar_type_go = {
 
 
 
-" 去除taglist =>原因: 使用tagbar和ctrlp-funky可以直接快速跳转函数和变量位置,taglist有些多余
-
 "################### 语言相关 ###################
 
 "###### Python #########
@@ -435,3 +428,5 @@ Plugin 'tpope/vim-fugitive'
 "使用okular来预览pdf文件
 " let g:livepreview_previewer = 'okular'
 "------------------------------------------- end of configs --------------------------------------------
+
+Plugin 'duggiefresh/vim-easydir'

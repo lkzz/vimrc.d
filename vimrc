@@ -1,3 +1,11 @@
+"""""""""""""""""""""""""""""""""""使用Vundle安装管理插件""""""""""""""""""""
+"插件配置和具体设置在vimrc.bundles中
+
+" install Vundle bundles
+if filereadable(expand("$HOME/.vim/vimrc.bundles"))
+    source $HOME/.vim/vimrc.bundles
+endif
+
 """""""""""""""""""""""""""""""""""界面配置"""""""""""""""""""""""""""""""""
 " Set extra options when running in GUI mode
 set shell=bash\ -i
@@ -14,16 +22,17 @@ if has("gui_running")
     set t_Co=256
 endif
 
-" 主题配置 solarized
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-let g:solarized_contrast="normal"
-let g:solarized_visibility="normal"
-" 配色方案
-set background=dark
+" 开启语法高亮
 syntax enable
+syntax on
+
+" 主题配置
 set t_Co=256
-colorscheme molokai
+set background=dark
+colorscheme gruvbox
+let g:gruvbox_contrast_dark='medium'
+let g:airline_theme='gruvbox'
+
 "设置标记一列的背景颜色和数字一行颜色一致
 hi! link SignColumn   LineNr
 hi! link ShowMarksHLl DiffAdd
@@ -55,15 +64,6 @@ set showcmd"
 set winwidth=79
 set magic                   " 设置魔术
 set shortmess=atI
-"""""""""""""""""""""""""""""""""""使用Vundle安装管理插件""""""""""""""""""""
-"插件配置和具体设置在vimrc.bundles中
-" 开启语法高亮
-syntax on
-
-" install Vundle bundles
-if filereadable(expand("$HOME/.vim/vimrc.bundles"))
-    source $HOME/.vim/vimrc.bundles
-endif
 
 """""""""""""""""""""""""""""""""""""常用功能设置""""""""""""""""""""""""""""
 "语言设置
@@ -121,7 +121,7 @@ set nobackup
 set noswapfile
 " 允许backspace和光标键跨越行边界
 set whichwrap+=<,>,h,l
-" set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace"
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace"
 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
 set mouse=a
 set selection=exclusive
@@ -237,6 +237,7 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 """""""""""""""""""""""""""""""""""""其他配置"""""""""""""""""""""""""
 
+set runtimepath^=~/.vim/bundle/ag
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -381,3 +382,4 @@ function! HideNumber()
   endif
   set number?
 endfunc
+
