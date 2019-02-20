@@ -427,6 +427,8 @@ Plugin 'tpope/vim-fugitive'
 " Plugin 'xuhdev/vim-latex-live-preview'
 "使用okular来预览pdf文件
 " let g:livepreview_previewer = 'okular'
-"------------------------------------------- end of configs --------------------------------------------
 
-Plugin 'duggiefresh/vim-easydir'
+"###### tmux config ######
+Plugin 'tmux-plugins/vim-tmux-focus-events'
+
+"------------------------------------------- end of configs --------------------------------------------
